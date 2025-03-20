@@ -1,103 +1,73 @@
-import Image from "next/image";
+import { GetCurrentDay, GetFiveDay, GetLocation } from '@/lib/services';
+import React from 'react'
 
-export default function Home() {
+export default async function Home()
+{
+  const locationData = await GetLocation("stockton");
+  let lat = locationData[0].lat;
+  let lon = locationData[0].lon;
+  const currentData = await GetCurrentDay(lat, lon);
+  const forecastData = await GetFiveDay(lat, lon);
+  console.log("Location Data", locationData, "Current Day Data", currentData, "Forecast Data", forecastData);
   return (
-    <div className="grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20 font-[family-name:var(--font-geist-sans)]">
-      <main className="flex flex-col gap-[32px] row-start-2 items-center sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={180}
-          height={38}
-          priority
-        />
-        <ol className="list-inside list-decimal text-sm/6 text-center sm:text-left font-[family-name:var(--font-geist-mono)]">
-          <li className="mb-2 tracking-[-.01em]">
-            Get started by editing{" "}
-            <code className="bg-black/[.05] dark:bg-white/[.06] px-1 py-0.5 rounded font-[family-name:var(--font-geist-mono)] font-semibold">
-              src/app/page.tsx
-            </code>
-            .
-          </li>
-          <li className="tracking-[-.01em]">
-            Save and see your changes instantly.
-          </li>
-        </ol>
+    <div>
+      <div className='grid grid-cols-5 gap-5 size-[98%] place-self-center align-middle my-4'>
+        {/*  */}
+        <div className='bg-gradient-to-b from-[#BEDCFF] via-[#86BDFD] via-10% to-[#2E5F97] border-8 border-[#0D55A8] rounded-xl col-span-3 text-center tracking-widest'>
+          <h1>{`${locationData[0].name}, ${locationData[0].state}`}</h1>
 
-        <div className="flex gap-4 items-center flex-col sm:flex-row">
-          <a
-            className="rounded-full border border-solid border-transparent transition-colors flex items-center justify-center bg-foreground text-background gap-2 hover:bg-[#383838] dark:hover:bg-[#ccc] font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 sm:w-auto"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={20}
-              height={20}
-            />
-            Deploy now
-          </a>
-          <a
-            className="rounded-full border border-solid border-black/[.08] dark:border-white/[.145] transition-colors flex items-center justify-center hover:bg-[#f2f2f2] dark:hover:bg-[#1a1a1a] hover:border-transparent font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 w-full sm:w-auto md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Read our docs
-          </a>
+
+          <img src="." alt="weatherIconCurrentDay" id='iconMain'/>
+          <h2>{`${currentData.main.temp.toFixed(0)}°F`}</h2>
         </div>
-      </main>
-      <footer className="row-start-3 flex gap-[24px] flex-wrap items-center justify-center">
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/file.svg"
-            alt="File icon"
-            width={16}
-            height={16}
-          />
-          Learn
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/window.svg"
-            alt="Window icon"
-            width={16}
-            height={16}
-          />
-          Examples
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/globe.svg"
-            alt="Globe icon"
-            width={16}
-            height={16}
-          />
-          Go to nextjs.org →
-        </a>
-      </footer>
+        <div className='col-span-2'>
+          <div className='bg-[#2E5F97] rounded-xl grid grid-cols-5 mb-5'>
+            <div className='col-span-4 bg-gray-300 m-4 rounded-md'>
+              <input type="text" name="search" id="citySearch" placeholder='Search For A City' className='ps-3 align-self-center w-full h-full font-bold text-3xl'/>
+            </div>
+            <div className='bg-gray-300 m-4 rounded-md'>
+
+            </div>
+          </div>
+          <div className='bg-[#2E5F97] rounded-xl py-2'>
+            
+          </div>
+        </div>
+
+        <div className='bg-gradient-to-b from-[#BEDCFF] via-[#86BDFD] via-10% to-[#2E5F97] border-8 border-[#0D55A8] rounded-xl text-center tracking-widest'>
+          <h1>Day1</h1>
+          <img src="." alt="weatherIconDay1" id='iconDay1'/>
+          <h3>{`${forecastData.list[0].main.temp.toFixed(0)}°F`}</h3>
+          <h4>{`/${forecastData.list[4].main.temp.toFixed(0)}°F`}</h4>
+        </div>
+        <div className='bg-gradient-to-b from-[#BEDCFF] via-[#86BDFD] via-10% to-[#2E5F97] border-8 border-[#0D55A8] rounded-xl text-center tracking-widest'>
+          <h1>Day2</h1>
+          <img src="." alt="weatherIconDay2" id='iconDay2'/>
+          <h3>{`${forecastData.list[8].main.temp.toFixed(0)}°F`}</h3>
+          <h4>{`/${forecastData.list[12].main.temp.toFixed(0)}°F`}</h4>
+        </div>
+        <div className='bg-gradient-to-b from-[#BEDCFF] via-[#86BDFD] via-10% to-[#2E5F97] border-8 border-[#0D55A8] rounded-xl text-center tracking-widest'>
+          <h1>Day3</h1>
+          <img src="." alt="weatherIconDay3" id='iconDay3'/>
+          <h3>{`${forecastData.list[16].main.temp.toFixed(0)}°F`}</h3>
+          <h4>{`/${forecastData.list[20].main.temp.toFixed(0)}°F`}</h4>
+        </div>
+        <div className='bg-gradient-to-b from-[#BEDCFF] via-[#86BDFD] via-10% to-[#2E5F97] border-8 border-[#0D55A8] rounded-xl text-center tracking-widest'>
+          <h1>Day4</h1>
+          <img src="." alt="weatherIconDay4" id='iconDay4'/>
+          <h3>{`${forecastData.list[24].main.temp.toFixed(0)}°F`}</h3>
+          <h4>{`/${forecastData.list[28].main.temp.toFixed(0)}°F`}</h4>
+        </div>
+        <div className='bg-gradient-to-b from-[#BEDCFF] via-[#86BDFD] via-10% to-[#2E5F97] border-8 border-[#0D55A8] rounded-xl text-center tracking-widest'>
+          <h1>Day5</h1>
+          <img src="." alt="weatherIconDay5" id='iconDay5'/>
+          <h3>{`${forecastData.list[32].main.temp.toFixed(0)}°F`}</h3>
+          <h4>{`/${forecastData.list[36].main.temp.toFixed(0)}°F`}</h4>
+        </div>
+        
+      </div>
     </div>
-  );
+  )
 }
+
+

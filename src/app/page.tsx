@@ -5,9 +5,9 @@ import { useEffect, useState } from 'react'
 
 export default  function Home()
 {
-  const [locData, setLocData] = useState<any>();
-  const [curData, setCurData] = useState<any>();
-  const [forCast, setForCast] = useState<any>();
+  const [locData, setLocData] = useState<string>();
+  const [curData, setCurData] = useState<string>();
+  const [forCast, setForCast] = useState<string>();
   const [firstLoad, setFirstLoad] = useState<boolean>(false);
   const [userInput, setUserInput] = useState<string>('sacramento');
 

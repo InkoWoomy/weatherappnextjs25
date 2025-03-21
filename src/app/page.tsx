@@ -1,9 +1,12 @@
 'use client'
+import { getFromFavorites, saveToFavorites } from '@/lib/localstorage';
 import { GetCurrentDay, GetFiveDay, GetLocation } from '@/lib/services';
 import React, { use, useEffect, useState } from 'react'
 
 export default  function Home()
 {
+  const favoritesList = document.getElementById("favoritesList")
+
   const [locData, setLocData] = useState<any>();
   const [curData, setCurData] = useState<any>();
   const [forCast, setForCast] = useState<any>();
@@ -24,13 +27,14 @@ export default  function Home()
       setFirstLoad(true)
 
       console.log(locationData)
+
+      let cityList = await getFromFavorites();
+      
     }
     getData();
   },[firstLoad])
   
-  const handleKeyDown = (event: {
-    [x: string]: any; key: string; 
-}) => {
+  const handleKeyDown = (event: {[x: string]: any; key: string; }) => {
     if (event.key === "Enter") {
       console.log("ENTER KEY PRESSED", event.currentTarget.value);
       setFirstLoad(false);
@@ -69,11 +73,11 @@ export default  function Home()
         </div>
         <div className='bg-gray-300 my-4 lg:ms-8 ms-2 lg:me-4 me-2 rounded-md'>
             <button type="button"  className='flex justify-self-center py-3'>
-            <img src="/images/FavoriteRemove.png" alt="RemoveFavorite" className='cursor-pointer'/>
+            <img src="/images/FavoriteAdd.png" alt="AddFavorite" className='cursor-pointer' onClick={() => (saveToFavorites(`${locData[0].name}, ${locData[0].state}`))}/>
             </button>
         </div>
         </div>
-        <div className='bg-[#2E5F97] rounded-xl py-2 h-100'>
+        <div id='favoritesList' className='bg-[#2E5F97] rounded-xl py-2 h-100'>
         
         </div>
     </div>
@@ -125,7 +129,7 @@ export default  function Home()
         
       </div>
     </div>
-    </> : <h1>{`Loading for ${locData[0].name}, ${locData[0].state}`}</h1>}
+    </> : <h1>Loading...</h1>}
     </>
   )
 }

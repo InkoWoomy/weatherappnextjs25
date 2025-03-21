@@ -1,6 +1,8 @@
 import React from 'react'
+'use client'
 
 const apikey = process.env.NEXT_PUBLIC_MY_API_KEY; 
+
 
 //GetLocation for searching location. Important for the next functions
 export const GetLocation = async(city: string) => {

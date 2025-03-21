@@ -31,7 +31,7 @@ export default  function Home()
     getData();
   },[firstLoad])
   
-  const handleKeyDown = (event: {[x: string]: any; key: string; }) => {
+  const handleKeyDown = (event: {[x: string]: string; key: string; }) => {
     if (event.key === "Enter") {
       console.log("ENTER KEY PRESSED", event.currentTarget.value);
       setFirstLoad(false);

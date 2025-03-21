@@ -1,5 +1,6 @@
 function saveToFavorites(city: string)
 {
+    if (typeof window === "undefined") return [];
     let cityArr = getFromFavorites();
     if (!cityArr.includes(city))
     {
@@ -12,9 +13,10 @@ function saveToFavorites(city: string)
 
 function getFromFavorites()
 {
+    if (typeof window === "undefined") return [];
     let favoritesData = localStorage.getItem('Favorited Cities');
 
-    if (favoritesData == null)
+    if (favoritesData === null)
     {
         return [];
     }
@@ -24,6 +26,7 @@ function getFromFavorites()
 
 function removeFromFavorites(city: string)
 {
+    if (typeof window === "undefined") return [];
     let favoritesData = getFromFavorites();
     let cityIndex = favoritesData.indexOf(city);
     favoritesData.splice(cityIndex, 1);

@@ -1,5 +1,5 @@
-import React from 'react'
 'use client'
+import React from 'react'
 const apikey = process.env.NEXT_PUBLIC_MY_API_KEY; 
 
 

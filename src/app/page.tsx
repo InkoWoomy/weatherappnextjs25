@@ -15,8 +15,8 @@ export default  function Home()
     const getData = async () => {
       const locationData = await GetLocation(userInput);
 
-      let lat = locationData[0].lat;
-      let lon = locationData[0].lon;
+      const lat = locationData[0].lat;
+      const lon = locationData[0].lon;
       const currentData = await GetCurrentDay(lat, lon);
       const forcastData = await GetFiveDay(lat, lon);
       setLocData(locationData);

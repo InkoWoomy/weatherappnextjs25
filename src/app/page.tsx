@@ -5,8 +5,6 @@ import React, { use, useEffect, useState } from 'react'
 
 export default  function Home()
 {
-  const favoritesList = document.getElementById("favoritesList")
-
   const [locData, setLocData] = useState<any>();
   const [curData, setCurData] = useState<any>();
   const [forCast, setForCast] = useState<any>();
@@ -28,7 +26,6 @@ export default  function Home()
 
       console.log(locationData)
 
-      let cityList = await getFromFavorites();
       
     }
     getData();

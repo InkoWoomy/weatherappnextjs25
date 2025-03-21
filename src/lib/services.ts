@@ -1,5 +1,4 @@
 'use client'
-import React from 'react'
 const apikey = process.env.NEXT_PUBLIC_WEATHER_API; 
 
 

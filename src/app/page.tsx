@@ -1,6 +1,7 @@
 'use client'
+
 import { GetCurrentDay, GetFiveDay, GetLocation } from '@/lib/services';
-import React, { use, useEffect, useState } from 'react'
+import { useEffect, useState } from 'react'
 
 export default  function Home()
 {
@@ -37,7 +38,7 @@ export default  function Home()
       setUserInput(event.currentTarget.value);
     }
   } 
-
+  
   console.log("Location Data\n", locData, "\nCurrent Day Data\n", curData, "\nForecast Data\n", forCast);
   return (
     <>
@@ -63,17 +64,17 @@ export default  function Home()
 
         </div>
         <div className='lg:col-span-2'>
-          <div className='bg-[#2E5F97] rounded-xl grid grid-cols-6 mb-5'>
-            <div className='col-span-5 bg-gray-300 my-4 ms-4 rounded-md'>
-                <input type="text" name="search" id="citySearch" onChange={(e) => setUserInput(e.target.value)} onKeyDown={handleKeyDown} placeholder='Search For A City' className='ps-3 align-self-center w-full h-full font-bold lg:text-3xl py-2 focus:rounded-md'/>
-            </div>
-            <div className='bg-gray-300 my-4 lg:ms-8 ms-2 lg:me-4 me-2 rounded-md'>
-                <button type="button"  className='flex justify-self-center py-3'>
-                <img src="/images/FavoriteAdd.png" alt="AddFavorite" className='cursor-pointer'/>
-                {/* onClick={() => (saveToFavorites(`${locData[0].name}, ${locData[0].state}`))} */}
-                </button>
-            </div>  
-          </div>
+        <div className='bg-[#2E5F97] rounded-xl grid grid-cols-6 mb-5'>
+        <div className='col-span-5 bg-gray-300 my-4 ms-4 rounded-md'>
+            <input type="text" name="search" id="citySearch" onChange={(e) => setUserInput(e.target.value)} onKeyDown={handleKeyDown} placeholder='Search For A City' className='ps-3 align-self-center w-full h-full font-bold lg:text-3xl py-2 focus:rounded-md'/>
+        </div>
+        <div className='bg-gray-300 my-4 lg:ms-8 ms-2 lg:me-4 me-2 rounded-md'>
+            <button type="button"  className='flex justify-self-center py-3'>
+            <img src="/images/FavoriteAdd.png" alt="AddFavorite" className='cursor-pointer'/>
+            {/* onClick={() => (saveToFavorites(`${locData[0].name}, ${locData[0].state}`))} */}
+            </button>
+        </div>
+        </div>
         <div className='bg-[#2E5F97] rounded-xl py-2 h-100'>
         
         </div>

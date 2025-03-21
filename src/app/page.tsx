@@ -1,5 +1,4 @@
 'use client'
-import { getFromFavorites, saveToFavorites } from '@/lib/localstorage';
 import { GetCurrentDay, GetFiveDay, GetLocation } from '@/lib/services';
 import React, { use, useEffect, useState } from 'react'
 
@@ -39,8 +38,6 @@ export default  function Home()
     }
   } 
 
-  const favorites = getFromFavorites();
-
   console.log("Location Data\n", locData, "\nCurrent Day Data\n", curData, "\nForecast Data\n", forCast);
   return (
     <>
@@ -72,7 +69,8 @@ export default  function Home()
             </div>
             <div className='bg-gray-300 my-4 lg:ms-8 ms-2 lg:me-4 me-2 rounded-md'>
                 <button type="button"  className='flex justify-self-center py-3'>
-                <img src="/images/FavoriteAdd.png" alt="AddFavorite" className='cursor-pointer' onClick={() => (saveToFavorites(`${locData[0].name}, ${locData[0].state}`))}/>
+                <img src="/images/FavoriteAdd.png" alt="AddFavorite" className='cursor-pointer'/>
+                {/* onClick={() => (saveToFavorites(`${locData[0].name}, ${locData[0].state}`))} */}
                 </button>
             </div>  
           </div>

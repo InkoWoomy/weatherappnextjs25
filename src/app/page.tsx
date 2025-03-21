@@ -1,13 +1,13 @@
 'use client'
 
 import { GetCurrentDay, GetFiveDay, GetLocation } from '@/lib/services';
-import { useEffect, useState } from 'react'
+import React, { use, useEffect, useState } from 'react'
 
 export default  function Home()
 {
-  const [locData, setLocData] = useState<string>();
-  const [curData, setCurData] = useState<string>();
-  const [forCast, setForCast] = useState<string>();
+  const [locData, setLocData] = useState<any>();
+  const [curData, setCurData] = useState<any>();
+  const [forCast, setForCast] = useState<any>();
   const [firstLoad, setFirstLoad] = useState<boolean>(false);
   const [userInput, setUserInput] = useState<string>('sacramento');
 
@@ -15,8 +15,8 @@ export default  function Home()
     const getData = async () => {
       const locationData = await GetLocation(userInput);
 
-      const lat = locationData[0].lat;
-      const lon = locationData[0].lon;
+      let lat = locationData[0].lat;
+      let lon = locationData[0].lon;
       const currentData = await GetCurrentDay(lat, lon);
       const forcastData = await GetFiveDay(lat, lon);
       setLocData(locationData);
@@ -31,7 +31,7 @@ export default  function Home()
     getData();
   },[firstLoad])
   
-  const handleKeyDown = (event: {[x: string]: string; key: string; }) => {
+  const handleKeyDown = (event: {[x: string]: any; key: string; }) => {
     if (event.key === "Enter") {
       console.log("ENTER KEY PRESSED", event.currentTarget.value);
       setFirstLoad(false);

@@ -42,7 +42,7 @@ export default  function Home()
   console.log("Location Data\n", locData, "\nCurrent Day Data\n", curData, "\nForecast Data\n", forCast);
   return (
     <>
-    {firstLoad ? <>
+    {firstLoad == false ? <>
       <div>
       <div className='grid lg:grid-cols-5 grid-cols-1 gap-5 size-[90%] place-self-center align-middle my-4'>
         {/*  */}

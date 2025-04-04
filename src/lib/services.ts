@@ -5,7 +5,7 @@ const apikey = process.env.NEXT_PUBLIC_WEATHER_API;
 
 //GetLocation for searching location. Important for the next functions
 export const GetLocation = async(city: string) => {
-    const response = await fetch(`http://api.openweathermap.org/geo/1.0/direct?q=${city}&limit=1&appid=${apikey}`);
+    const response = await fetch(`https://api.openweathermap.org/geo/1.0/direct?q=${city}&limit=1&appid=${apikey}`);
     const data = await response.json();
     return data;
 }
